@@ -1,10 +1,9 @@
-package com.example.offf.infrastructure.rest.dto;
+package com.example.offf.hexagon.infrastructure.rest.dto;
 
-import com.example.offf.domain.model.TypeDeCours;
+import com.example.offf.hexagon.domain.model.TypeDeCours;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 
 public class CourDto implements Serializable {
 

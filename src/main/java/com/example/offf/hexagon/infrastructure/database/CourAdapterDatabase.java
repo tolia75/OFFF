@@ -1,8 +1,8 @@
-package com.example.offf.infrastructure.database;
+package com.example.offf.hexagon.infrastructure.database;
 
-import com.example.offf.domain.model.Cour;
-import com.example.offf.domain.port.secondary.CourAdapter;
-import com.example.offf.infrastructure.database.dao.CourDAO;
+import com.example.offf.hexagon.domain.model.Cour;
+import com.example.offf.hexagon.domain.port.secondary.CourAdapter;
+import com.example.offf.hexagon.infrastructure.database.dao.CourDAO;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

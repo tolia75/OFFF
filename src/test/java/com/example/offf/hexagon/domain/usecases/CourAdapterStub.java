@@ -1,7 +1,7 @@
-package com.example.offf.domain.usecases;
+package com.example.offf.hexagon.domain.usecases;
 
-import com.example.offf.domain.model.Cour;
-import com.example.offf.domain.port.secondary.CourAdapter;
+import com.example.offf.hexagon.domain.model.Cour;
+import com.example.offf.hexagon.domain.port.secondary.CourAdapter;
 
 import java.util.Optional;
 

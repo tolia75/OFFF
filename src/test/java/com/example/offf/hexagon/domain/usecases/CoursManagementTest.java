@@ -1,10 +1,10 @@
-package com.example.offf.domain.usecases;
+package com.example.offf.hexagon.domain.usecases;
 
-import com.example.offf.domain.exception.ObjetMetierNonValideException;
-import com.example.offf.domain.model.TypeDeCours;
-import com.example.offf.domain.port.primary.GestionCours;
-import com.example.offf.domain.model.Cour;
-import com.example.offf.domain.port.secondary.CourAdapter;
+import com.example.offf.hexagon.domain.exception.ObjetMetierNonValideException;
+import com.example.offf.hexagon.domain.model.TypeDeCours;
+import com.example.offf.hexagon.domain.port.primary.GestionCours;
+import com.example.offf.hexagon.domain.model.Cour;
+import com.example.offf.hexagon.domain.port.secondary.CourAdapter;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,8 @@
 package com.example.offf.configuration;
 
-import com.example.offf.domain.port.primary.GestionCours;
-import com.example.offf.domain.port.secondary.CourAdapter;
-import com.example.offf.domain.usecases.CoursManagement;
+import com.example.offf.hexagon.domain.port.primary.GestionCours;
+import com.example.offf.hexagon.domain.port.secondary.CourAdapter;
+import com.example.offf.hexagon.domain.usecases.CoursManagement;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

@@ -1,6 +1,6 @@
-package com.example.offf.domain.model;
+package com.example.offf.hexagon.domain.model;
 
-import com.example.offf.domain.exception.ObjetMetierNonValideException;
+import com.example.offf.hexagon.domain.exception.ObjetMetierNonValideException;
 
 import java.text.SimpleDateFormat;
 import java.util.Objects;

@@ -1,8 +1,8 @@
 package com.example.offf.rest;
 
-import com.example.offf.domain.model.Cour;
-import com.example.offf.domain.port.primary.GestionCours;
-import com.example.offf.domain.port.secondary.CourAdapter;
+import com.example.offf.hexagon.domain.model.Cour;
+import com.example.offf.hexagon.domain.port.primary.GestionCours;
+import com.example.offf.hexagon.domain.port.secondary.CourAdapter;
 
 public class GestionCoursStub extends GestionCours {
 

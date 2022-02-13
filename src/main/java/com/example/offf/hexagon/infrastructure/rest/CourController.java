@@ -1,8 +1,8 @@
-package com.example.offf.infrastructure.rest;
+package com.example.offf.hexagon.infrastructure.rest;
 
-import com.example.offf.infrastructure.rest.dto.CourDto;
-import com.example.offf.domain.model.Cour;
-import com.example.offf.domain.usecases.CoursManagement;
+import com.example.offf.hexagon.infrastructure.rest.dto.CourDto;
+import com.example.offf.hexagon.domain.model.Cour;
+import com.example.offf.hexagon.domain.usecases.CoursManagement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,10 +1,10 @@
 package com.example.offf.database;
 
-import com.example.offf.domain.model.Cour;
-import com.example.offf.domain.model.TypeDeCours;
-import com.example.offf.infrastructure.database.CourAdapterDatabase;
-import com.example.offf.infrastructure.database.CourRepositoryPostgres;
-import com.example.offf.infrastructure.database.dao.CourDAO;
+import com.example.offf.hexagon.domain.model.Cour;
+import com.example.offf.hexagon.domain.model.TypeDeCours;
+import com.example.offf.hexagon.infrastructure.database.CourAdapterDatabase;
+import com.example.offf.hexagon.infrastructure.database.CourRepositoryPostgres;
+import com.example.offf.hexagon.infrastructure.database.dao.CourDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

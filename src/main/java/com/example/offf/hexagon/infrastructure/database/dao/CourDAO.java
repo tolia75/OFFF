@@ -1,6 +1,6 @@
-package com.example.offf.infrastructure.database.dao;
+package com.example.offf.hexagon.infrastructure.database.dao;
 
-import com.example.offf.domain.model.TypeDeCours;
+import com.example.offf.hexagon.domain.model.TypeDeCours;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
