@@ -2,6 +2,7 @@ package com.example.offf.database;
 
 import com.example.offf.hexagon.domain.model.Cour;
 import com.example.offf.hexagon.domain.model.TypeDeCours;
+import com.example.offf.hexagon.domain.usecases.CoursFixture;
 import com.example.offf.hexagon.infrastructure.database.CourAdapterDatabase;
 import com.example.offf.hexagon.infrastructure.database.CourRepositoryPostgres;
 import com.example.offf.hexagon.infrastructure.database.dao.CourDAO;
@@ -11,9 +12,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -50,6 +50,20 @@ class CourAdapterDatabaseTest {
 
         // Assert
         assertEquals(courAttendu, courOptional.get());
+    }
+
+    @Test
+    void doitRecupererTousLesCours() {
+        // Given
+        CoursFixture coursFixture = new CoursFixture();
+        List<Cour> courAttendus = coursFixture.getAllCours();
+        when(courRepositoryPostgres.findAll()).thenReturn(coursFixture.getAllCoursDao());
+
+        // When
+        List<Cour> cours = courAdapterDatabase.getAllCours();
+
+        // Assert
+        assertEquals(courAttendus, cours);
     }
 
     private Cour createCourAttendu(long id, TypeDeCours typeDeCours, LocalDateTime localDateTime) {

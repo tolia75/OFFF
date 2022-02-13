@@ -5,7 +5,10 @@ import com.example.offf.hexagon.domain.port.secondary.CourAdapter;
 import com.example.offf.hexagon.infrastructure.database.dao.CourDAO;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Component
 public class CourAdapterDatabase implements CourAdapter {
@@ -20,6 +23,13 @@ public class CourAdapterDatabase implements CourAdapter {
     public Optional<Cour> createCour(Cour cour) {
         CourDAO courDAO = toCourDAO(cour);
         return Optional.of(toCour(courRepositoryPostgres.save(courDAO)));
+    }
+
+    @Override
+    public List<Cour> getAllCours() {
+        return StreamSupport.stream(courRepositoryPostgres.findAll().spliterator(), false)
+                .map(this::toCour)
+                .collect(Collectors.toList());
     }
 
     private CourDAO toCourDAO(Cour cour) {

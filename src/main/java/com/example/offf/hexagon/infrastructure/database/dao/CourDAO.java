@@ -22,6 +22,9 @@ public class CourDAO {
     private TypeDeCours typeDeCour;
     private LocalDateTime dateDuCour;
 
+    public CourDAO() {
+    }
+
     private CourDAO(CourDAOBuilder courDAOBuilder) {
         this.id = courDAOBuilder.id;
         this.typeDeCour = courDAOBuilder.typeDeCours;

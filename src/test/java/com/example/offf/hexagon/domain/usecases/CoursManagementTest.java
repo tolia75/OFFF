@@ -18,10 +18,13 @@ class CoursManagementTest {
 
     private CoursManagement coursManagement;
     private CourAdapter courAdapter;
+    private CoursFixture coursFixture;
+
 
     @BeforeEach
     void setUp() {
-        courAdapter = new CourAdapterStub();
+        coursFixture = new CoursFixture();
+        courAdapter = new CourAdapterStub(coursFixture);
         coursManagement = new GestionCours(courAdapter);
     }
 
@@ -109,7 +112,7 @@ class CoursManagementTest {
     @Test
     void doitRenvoyerTousLesCours() {
         // Given
-        List<Cour> coursAttendus = CoursFixture.getAllCours();
+        List<Cour> coursAttendus = coursFixture.getAllCours();
 
         // When
         List<Cour> cours = coursManagement.recupereTousLesCours();

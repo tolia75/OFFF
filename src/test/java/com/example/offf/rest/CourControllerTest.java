@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.time.LocalDateTime;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -21,6 +22,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 class CourControllerTest {
+
+    // TODO - ADS - Gérer une base tampon pour les tests
 
     @Autowired
     private MockMvc mockMvc;
@@ -42,7 +45,7 @@ class CourControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(
                         new CourDto.CourDtoBuilder()
-                                .dateDuCours(LocalDateTime.of(2022, 1,1,1,1))
+                                .dateDuCour(LocalDateTime.of(2022, 1,1,1,1))
                                 .build())))
                 .andExpect(status().isUnprocessableEntity());
     }
@@ -53,7 +56,7 @@ class CourControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(
                         new CourDto.CourDtoBuilder()
-                                .typeDeCours(TypeDeCours.YOGA)
+                                .typeDeCour(TypeDeCours.YOGA)
                                 .build())))
                 .andExpect(status().isUnprocessableEntity());
     }
@@ -64,12 +67,33 @@ class CourControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(
                         new CourDto.CourDtoBuilder()
-                                .typeDeCours(TypeDeCours.YOGA)
-                                .dateDuCours(LocalDateTime.of(2022, 1,1,1,1))
+                                .typeDeCour(TypeDeCours.YOGA)
+                                .dateDuCour(LocalDateTime.of(2022, 1,1,1,1))
                                 .build())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id", is("1")))
-                .andExpect(jsonPath("$[0].typeDuCour", is("YOGA")))
+                .andExpect(jsonPath("$[0].typeDeCour", is("YOGA")))
                 .andExpect(jsonPath("$[0].dateDuCour", is("1")));
+    }
+
+    @Test
+    void doitRenvoyerTousLesCours() throws Exception {
+        mockMvc.perform(get("/cour/cours"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id", is(1)))
+                .andExpect(jsonPath("$[0].typeDeCour", is("YOGA")))
+                .andExpect(jsonPath("$[0].dateDuCour", is("1")))
+
+                .andExpect(jsonPath("$[1].id", is(2)))
+                .andExpect(jsonPath("$[1].typeDeCour", is("HIIT")))
+                .andExpect(jsonPath("$[1].dateDuCour", is("1")))
+
+                .andExpect(jsonPath("$[2].id", is(3)))
+                .andExpect(jsonPath("$[2].typeDeCour", is("PILATE")))
+                .andExpect(jsonPath("$[2].dateDuCour", is("1")))
+
+                .andExpect(jsonPath("$[3].id", is(4)))
+                .andExpect(jsonPath("$[3].typeDeCour", is("ZUMBA")))
+                .andExpect(jsonPath("$[3].dateDuCour", is("1")));
     }
 }

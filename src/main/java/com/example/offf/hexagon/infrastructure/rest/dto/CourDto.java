@@ -11,50 +11,50 @@ public class CourDto implements Serializable {
 
     @JsonProperty("id")
     private long id;
-    @JsonProperty("typeDeCours")
-    private TypeDeCours typeDeCours;
-    @JsonProperty("dateDuCours")
+    @JsonProperty("typeDeCour")
+    private TypeDeCours typeDeCour;
+    @JsonProperty("dateDuCour")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
-    private LocalDateTime dateDuCours;
+    private LocalDateTime dateDuCour;
 
     private CourDto() {
     }
 
     private CourDto(CourDtoBuilder courDAOBuilder) {
         this.id = courDAOBuilder.id;
-        this.typeDeCours = courDAOBuilder.typeDeCours;
-        this.dateDuCours = courDAOBuilder.dateDuCours;
+        this.typeDeCour = courDAOBuilder.typeDeCour;
+        this.dateDuCour = courDAOBuilder.dateDuCour;
     }
 
     public long getId() {
         return id;
     }
 
-    public TypeDeCours getTypeDeCours() {
-        return typeDeCours;
+    public TypeDeCours getTypeDeCour() {
+        return typeDeCour;
     }
 
-    public LocalDateTime getDateDuCours() {
-        return dateDuCours;
+    public LocalDateTime getDateDuCour() {
+        return dateDuCour;
     }
 
     public static class CourDtoBuilder {
         private long id;
-        private TypeDeCours typeDeCours;
-        private LocalDateTime dateDuCours;
+        private TypeDeCours typeDeCour;
+        private LocalDateTime dateDuCour;
 
         public CourDtoBuilder id(long id) {
             this.id = id;
             return this;
         }
 
-        public CourDtoBuilder typeDeCours(TypeDeCours typeDeCours) {
-            this.typeDeCours = typeDeCours;
+        public CourDtoBuilder typeDeCour(TypeDeCours typeDeCour) {
+            this.typeDeCour = typeDeCour;
             return this;
         }
 
-        public CourDtoBuilder dateDuCours(LocalDateTime dateDuCours) {
-            this.dateDuCours = dateDuCours;
+        public CourDtoBuilder dateDuCour(LocalDateTime dateDuCour) {
+            this.dateDuCour = dateDuCour;
             return this;
         }
 
