@@ -13,6 +13,7 @@ public class GestionCours implements com.example.offf.domain.usecases.CoursManag
 
     @Override
     public Cour creerCour(Cour cour) {
+        cour.isValide();
         return courRepository.createCour(cour).get();
     }
 }

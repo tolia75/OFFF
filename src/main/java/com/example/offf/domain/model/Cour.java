@@ -1,10 +1,13 @@
 package com.example.offf.domain.model;
 
+import com.example.offf.domain.exception.ObjetMetierNonValideException;
+
 import java.text.SimpleDateFormat;
 import java.util.Objects;
 
 public class Cour {
 
+    private static final String COURS_TRANSMIS_NON_CORRECT = "Le cours transmis n'est pas correcte";
     private long id;
     private TypeDeCours typeDeCours;
     private SimpleDateFormat dateDuCours;
@@ -46,6 +49,22 @@ public class Cour {
                 ", typeDeCours=" + typeDeCours +
                 ", simpleDateFormat=" + dateDuCours +
                 '}';
+    }
+
+    public void isValide() {
+        boolean isValid = true;
+
+        if (null == typeDeCours) {
+            isValid = false;
+        }
+
+        if (null == dateDuCours) {
+            isValid = false;
+        }
+
+        if (!isValid) {
+            throw new ObjetMetierNonValideException(COURS_TRANSMIS_NON_CORRECT);
+        }
     }
 
     public static class CourBuilder {
