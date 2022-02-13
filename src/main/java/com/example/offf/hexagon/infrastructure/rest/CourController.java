@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.SimpleDateFormat;
-
 @RestController()
 @RequestMapping("/cour")
 public class CourController {
@@ -33,7 +31,7 @@ public class CourController {
         return new CourDto.CourDtoBuilder()
                 .id(cour.getId())
                 .typeDeCours(cour.getTypeDeCours())
-                .dateDuCours(cour.getDateDuCours().toString())
+                .dateDuCours(cour.getDateDuCours())
                 .build();
     }
 
@@ -41,7 +39,7 @@ public class CourController {
         return new Cour.CourBuilder()
         .id(courDto.getId())
         .typeDeCours(courDto.getTypeDeCours())
-        .dateDuCours(new SimpleDateFormat(courDto.getDateDuCours()))
+        .dateDuCours(courDto.getDateDuCours())
         .build();
     }
 }

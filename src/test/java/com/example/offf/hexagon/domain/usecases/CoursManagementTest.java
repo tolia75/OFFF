@@ -9,7 +9,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -27,9 +27,9 @@ class CoursManagementTest {
     @Test
     void doitCreerUnCoursModeYoga() {
         // Given
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
-        Cour courTest = createCourTest(TypeDeCours.YOGA, simpleDateFormat);
-        Cour courAttendu = createCourAttendu(1, TypeDeCours.YOGA, simpleDateFormat);
+        LocalDateTime localDateTime = LocalDateTime.of(2022, 1, 1, 1, 1);
+        Cour courTest = createCourTest(TypeDeCours.YOGA, localDateTime);
+        Cour courAttendu = createCourAttendu(1, TypeDeCours.YOGA, localDateTime);
 
         // When
         Cour cour = coursManagement.creerCour(courTest);
@@ -41,9 +41,9 @@ class CoursManagementTest {
     @Test
     void doitCreerUnCoursModeHIIT() {
         // Given
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
-        Cour courTest = createCourTest(TypeDeCours.HIIT, simpleDateFormat);
-        Cour courAttendu = createCourAttendu(1, TypeDeCours.HIIT, simpleDateFormat);
+        LocalDateTime localDateTime = LocalDateTime.of(2022, 1, 1, 1, 1);
+        Cour courTest = createCourTest(TypeDeCours.HIIT, localDateTime);
+        Cour courAttendu = createCourAttendu(1, TypeDeCours.HIIT, localDateTime);
 
         // When
         Cour cour = coursManagement.creerCour(courTest);
@@ -55,9 +55,9 @@ class CoursManagementTest {
     @Test
     void doitCreerUnCoursModeZumba() {
         // Given
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
-        Cour courTest = createCourTest(TypeDeCours.ZUMBA, simpleDateFormat);
-        Cour courAttendu = createCourAttendu(1, TypeDeCours.ZUMBA, simpleDateFormat);
+        LocalDateTime localDateTime = LocalDateTime.of(2022, 1, 1, 1, 1);
+        Cour courTest = createCourTest(TypeDeCours.ZUMBA, localDateTime);
+        Cour courAttendu = createCourAttendu(1, TypeDeCours.ZUMBA, localDateTime);
 
         // When
         Cour cour = coursManagement.creerCour(courTest);
@@ -69,9 +69,9 @@ class CoursManagementTest {
     @Test
     void doitCreerUnCoursModePilate() {
         // Given
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
-        Cour courTest = createCourTest(TypeDeCours.PILATE, simpleDateFormat);
-        Cour courAttendu = createCourAttendu(1, TypeDeCours.PILATE, simpleDateFormat);
+        LocalDateTime localDateTime = LocalDateTime.of(2022, 1, 1, 1, 1);
+        Cour courTest = createCourTest(TypeDeCours.PILATE, localDateTime);
+        Cour courAttendu = createCourAttendu(1, TypeDeCours.PILATE, localDateTime);
 
         // When
         Cour cour = coursManagement.creerCour(courTest);
@@ -83,9 +83,9 @@ class CoursManagementTest {
     @Test
     void neDoitPasCreerUnCoursSiPasDeTypeDeCours() {
         // Given
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
+        LocalDateTime localDateTime = LocalDateTime.of(2022, 1, 1, 1, 1);
         Cour courTest = new Cour.CourBuilder()
-                .dateDuCours(simpleDateFormat)
+                .dateDuCours(localDateTime)
                 .build();
 
         Assertions.assertThatThrownBy(() -> coursManagement.creerCour(courTest))
@@ -105,18 +105,18 @@ class CoursManagementTest {
                 .hasMessageContaining("Le cours transmis n'est pas correcte");
     }
 
-    private Cour createCourAttendu(long id, TypeDeCours typeDeCours, SimpleDateFormat simpleDateFormat) {
+    private Cour createCourAttendu(long id, TypeDeCours typeDeCours, LocalDateTime localDateTime) {
         return new Cour.CourBuilder()
                 .id(1)
                 .typeDeCours(typeDeCours)
-                .dateDuCours(simpleDateFormat)
+                .dateDuCours(localDateTime)
                 .build();
     }
 
-    private Cour createCourTest(TypeDeCours typeDeCours, SimpleDateFormat simpleDateFormat) {
+    private Cour createCourTest(TypeDeCours typeDeCours,  LocalDateTime localDateTime) {
         return new Cour.CourBuilder()
                 .typeDeCours(typeDeCours)
-                .dateDuCours(simpleDateFormat)
+                .dateDuCours(localDateTime)
                 .build();
     }
 }

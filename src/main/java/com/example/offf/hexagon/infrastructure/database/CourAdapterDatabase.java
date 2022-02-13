@@ -33,8 +33,8 @@ public class CourAdapterDatabase implements CourAdapter {
     private Cour toCour(CourDAO courDAO) {
         return new Cour.CourBuilder()
                 .id(courDAO.getId())
-                .typeDeCours(courDAO.getTypeDeCours())
-                .dateDuCours(courDAO.getDateDuCours())
+                .typeDeCours(courDAO.getTypeDeCour())
+                .dateDuCours(courDAO.getDateDuCour())
                 .build();
     }
 

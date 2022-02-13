@@ -1,9 +1,11 @@
 package com.example.offf.hexagon.infrastructure.rest.dto;
 
 import com.example.offf.hexagon.domain.model.TypeDeCours;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class CourDto implements Serializable {
 
@@ -12,7 +14,8 @@ public class CourDto implements Serializable {
     @JsonProperty("typeDeCours")
     private TypeDeCours typeDeCours;
     @JsonProperty("dateDuCours")
-    private String dateDuCours;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
+    private LocalDateTime dateDuCours;
 
     private CourDto() {
     }
@@ -31,14 +34,14 @@ public class CourDto implements Serializable {
         return typeDeCours;
     }
 
-    public String getDateDuCours() {
+    public LocalDateTime getDateDuCours() {
         return dateDuCours;
     }
 
     public static class CourDtoBuilder {
         private long id;
         private TypeDeCours typeDeCours;
-        private String dateDuCours;
+        private LocalDateTime dateDuCours;
 
         public CourDtoBuilder id(long id) {
             this.id = id;
@@ -50,7 +53,7 @@ public class CourDto implements Serializable {
             return this;
         }
 
-        public CourDtoBuilder dateDuCours(String dateDuCours) {
+        public CourDtoBuilder dateDuCours(LocalDateTime dateDuCours) {
             this.dateDuCours = dateDuCours;
             return this;
         }

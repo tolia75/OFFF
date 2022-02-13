@@ -1,4 +1,4 @@
-CREATE TABLE cour
+CREATE TABLE IF NOT EXISTS cour
 (
  cour_id INT NOT NULL,
  type_de_cour varchar(6) NOT NULL ,

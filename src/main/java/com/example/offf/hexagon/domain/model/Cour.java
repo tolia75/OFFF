@@ -2,7 +2,7 @@ package com.example.offf.hexagon.domain.model;
 
 import com.example.offf.hexagon.domain.exception.ObjetMetierNonValideException;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Cour {
@@ -10,7 +10,7 @@ public class Cour {
     private static final String COURS_TRANSMIS_NON_CORRECT = "Le cours transmis n'est pas correcte";
     private long id;
     private TypeDeCours typeDeCours;
-    private SimpleDateFormat dateDuCours;
+    private LocalDateTime dateDuCours;
 
     private Cour(CourBuilder courBuilder) {
         this.id = courBuilder.id;
@@ -27,7 +27,7 @@ public class Cour {
         return typeDeCours;
     }
 
-    public SimpleDateFormat getDateDuCours() {
+    public LocalDateTime getDateDuCours() {
         return dateDuCours;
     }
 
@@ -74,7 +74,7 @@ public class Cour {
     public static class CourBuilder {
         private long id;
         private TypeDeCours typeDeCours;
-        private SimpleDateFormat dateDuCours;
+        private LocalDateTime dateDuCours;
 
         public CourBuilder id(long id) {
             this.id = id;
@@ -86,7 +86,7 @@ public class Cour {
             return this;
         }
 
-        public CourBuilder dateDuCours(SimpleDateFormat dateDuCours) {
+        public CourBuilder dateDuCours(LocalDateTime dateDuCours) {
             this.dateDuCours = dateDuCours;
             return this;
         }

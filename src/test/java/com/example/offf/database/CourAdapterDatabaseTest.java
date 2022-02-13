@@ -12,6 +12,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -34,13 +36,13 @@ class CourAdapterDatabaseTest {
     @Test
     void doitCreerCourDeTypeYoga() {
         // Given
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
-        Cour courTest = createCourTest(TypeDeCours.YOGA, simpleDateFormat);
-        Cour courAttendu = createCourAttendu(1, TypeDeCours.YOGA, simpleDateFormat);
+        LocalDateTime localDateTime = LocalDateTime.of(2022, 1, 1, 1, 1);
+        Cour courTest = createCourTest(TypeDeCours.YOGA, localDateTime);
+        Cour courAttendu = createCourAttendu(1, TypeDeCours.YOGA, localDateTime);
         when(courRepositoryPostgres.save(any())).thenReturn(new CourDAO.CourDAOBuilder()
             .id(1)
             .typeDeCours(TypeDeCours.YOGA)
-            .dateDuCours(simpleDateFormat)
+            .dateDuCours(localDateTime)
             .build());
 
         // When
@@ -50,18 +52,18 @@ class CourAdapterDatabaseTest {
         assertEquals(courAttendu, courOptional.get());
     }
 
-    private Cour createCourAttendu(long id, TypeDeCours typeDeCours, SimpleDateFormat simpleDateFormat) {
+    private Cour createCourAttendu(long id, TypeDeCours typeDeCours, LocalDateTime localDateTime) {
         return new Cour.CourBuilder()
                 .id(1)
                 .typeDeCours(typeDeCours)
-                .dateDuCours(simpleDateFormat)
+                .dateDuCours(localDateTime)
                 .build();
     }
 
-    private Cour createCourTest(TypeDeCours typeDeCours, SimpleDateFormat simpleDateFormat) {
+    private Cour createCourTest(TypeDeCours typeDeCours, LocalDateTime localDateTime) {
         return new Cour.CourBuilder()
                 .typeDeCours(typeDeCours)
-                .dateDuCours(simpleDateFormat)
+                .dateDuCours(localDateTime)
                 .build();
     }
 }

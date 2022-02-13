@@ -2,42 +2,45 @@ package com.example.offf.hexagon.infrastructure.database.dao;
 
 import com.example.offf.hexagon.domain.model.TypeDeCours;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity()
 @Table(name = "cour")
 public class CourDAO {
 
     @Id
+    @Column(name = "cour_id")
     private long id;
-    private TypeDeCours typeDeCours;
-    private SimpleDateFormat dateDuCours;
+    private TypeDeCours typeDeCour;
+    private LocalDateTime dateDuCour;
 
     private CourDAO(CourDAOBuilder courDAOBuilder) {
         this.id = courDAOBuilder.id;
-        this.typeDeCours = courDAOBuilder.typeDeCours;
-        this.dateDuCours = courDAOBuilder.dateDuCours;
+        this.typeDeCour = courDAOBuilder.typeDeCours;
+        this.dateDuCour = courDAOBuilder.dateDuCours;
     }
 
     public long getId() {
         return id;
     }
 
-    public TypeDeCours getTypeDeCours() {
-        return typeDeCours;
+    public TypeDeCours getTypeDeCour() {
+        return typeDeCour;
     }
 
-    public SimpleDateFormat getDateDuCours() {
-        return dateDuCours;
+    public LocalDateTime getDateDuCour() {
+        return dateDuCour;
     }
 
     public static class CourDAOBuilder {
         private long id;
         private TypeDeCours typeDeCours;
-        private SimpleDateFormat dateDuCours;
+        private LocalDateTime dateDuCours;
 
         public CourDAOBuilder id(long id) {
             this.id = id;
@@ -49,7 +52,7 @@ public class CourDAO {
             return this;
         }
 
-        public CourDAOBuilder dateDuCours(SimpleDateFormat dateDuCours) {
+        public CourDAOBuilder dateDuCours(LocalDateTime dateDuCours) {
             this.dateDuCours = dateDuCours;
             return this;
         }

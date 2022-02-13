@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDateTime;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -40,7 +42,7 @@ class CourControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(
                         new CourDto.CourDtoBuilder()
-                                .dateDuCours("13/02/2022")
+                                .dateDuCours(LocalDateTime.of(2022, 1,1,1,1))
                                 .build())))
                 .andExpect(status().isUnprocessableEntity());
     }
@@ -62,9 +64,9 @@ class CourControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(
                         new CourDto.CourDtoBuilder()
-                        .typeDeCours(TypeDeCours.YOGA)
-                        .dateDuCours("13/02/2022")
-                        .build())))
+                                .typeDeCours(TypeDeCours.YOGA)
+                                .dateDuCours(LocalDateTime.of(2022, 1,1,1,1))
+                                .build())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id", is("1")))
                 .andExpect(jsonPath("$[0].typeDuCour", is("YOGA")))
