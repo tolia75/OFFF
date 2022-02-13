@@ -1,19 +1,19 @@
 package com.example.offf.domain.port.primary;
 
-import com.example.offf.domain.port.secondary.CourRepository;
+import com.example.offf.domain.port.secondary.CourAdapter;
 import com.example.offf.domain.model.Cour;
 
 public class GestionCours implements com.example.offf.domain.usecases.CoursManagement {
 
-    CourRepository courRepository;
+    CourAdapter courAdapter;
 
-    public GestionCours(CourRepository courRepository) {
-        this.courRepository = courRepository;
+    public GestionCours(CourAdapter courAdapter) {
+        this.courAdapter = courAdapter;
     }
 
     @Override
     public Cour creerCour(Cour cour) {
         cour.isValide();
-        return courRepository.createCour(cour).get();
+        return courAdapter.createCour(cour).get();
     }
 }

@@ -4,6 +4,6 @@ import com.example.offf.domain.model.Cour;
 
 import java.util.Optional;
 
-public interface CourRepository {
+public interface CourAdapter {
     Optional<Cour> createCour(Cour cour);
 }

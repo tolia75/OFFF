@@ -1,11 +1,11 @@
 package com.example.offf.domain.usecases;
 
 import com.example.offf.domain.model.Cour;
-import com.example.offf.domain.port.secondary.CourRepository;
+import com.example.offf.domain.port.secondary.CourAdapter;
 
 import java.util.Optional;
 
-public class CourRepositoryStub implements CourRepository {
+public class CourAdapterStub implements CourAdapter {
 
 
     @Override

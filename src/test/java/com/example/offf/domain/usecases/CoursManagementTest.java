@@ -4,25 +4,24 @@ import com.example.offf.domain.exception.ObjetMetierNonValideException;
 import com.example.offf.domain.model.TypeDeCours;
 import com.example.offf.domain.port.primary.GestionCours;
 import com.example.offf.domain.model.Cour;
-import com.example.offf.domain.port.secondary.CourRepository;
+import com.example.offf.domain.port.secondary.CourAdapter;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.text.SimpleDateFormat;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CoursManagementTest {
 
     private CoursManagement coursManagement;
-    private CourRepository courRepository;
+    private CourAdapter courAdapter;
 
     @BeforeEach
     void setUp() {
-        courRepository = new CourRepositoryStub();
-        coursManagement = new GestionCours(courRepository);
+        courAdapter = new CourAdapterStub();
+        coursManagement = new GestionCours(courAdapter);
     }
 
     @Test

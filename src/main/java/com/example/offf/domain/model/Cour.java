@@ -19,6 +19,10 @@ public class Cour {
 
     }
 
+    public long getId() {
+        return id;
+    }
+
     public TypeDeCours getTypeDeCours() {
         return typeDeCours;
     }
@@ -90,7 +94,5 @@ public class Cour {
         public Cour build() {
           return new Cour(this);
         }
-
-
     }
 }
