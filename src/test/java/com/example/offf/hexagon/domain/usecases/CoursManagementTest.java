@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -103,6 +104,18 @@ class CoursManagementTest {
         Assertions.assertThatThrownBy(() -> coursManagement.creerCour(courTest))
                 .isInstanceOf(ObjetMetierNonValideException.class)
                 .hasMessageContaining("Le cours transmis n'est pas correcte");
+    }
+
+    @Test
+    void doitRenvoyerTousLesCours() {
+        // Given
+        List<Cour> coursAttendus = CoursFixture.getAllCours();
+
+        // When
+        List<Cour> cours = coursManagement.recupereTousLesCours();
+
+        // Assert
+        assertEquals(coursAttendus, cours);
     }
 
     private Cour createCourAttendu(long id, TypeDeCours typeDeCours, LocalDateTime localDateTime) {

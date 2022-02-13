@@ -4,6 +4,8 @@ import com.example.offf.hexagon.domain.model.TypeDeCours;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDate;
@@ -14,6 +16,7 @@ import java.time.LocalDateTime;
 public class CourDAO {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cour_id")
     private long id;
     private TypeDeCours typeDeCour;
