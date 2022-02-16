@@ -28,6 +28,18 @@ public class Sportif {
         return Objects.hash(id, nom, prenom);
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
     public boolean isValid() {
         boolean isValid = true;
 

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CoursManagementTest {
@@ -92,7 +93,7 @@ class CoursManagementTest {
                 .dateDuCours(localDateTime)
                 .build();
 
-        Assertions.assertThatThrownBy(() -> coursManagement.creerCour(courTest))
+        assertThatThrownBy(() -> coursManagement.creerCour(courTest))
                 .isInstanceOf(ObjetMetierNonValideException.class)
                 .hasMessageContaining("Le cours transmis n'est pas correcte");
     }
@@ -104,7 +105,7 @@ class CoursManagementTest {
                 .typeDeCours(TypeDeCours.YOGA)
                 .build();
 
-        Assertions.assertThatThrownBy(() -> coursManagement.creerCour(courTest))
+        assertThatThrownBy(() -> coursManagement.creerCour(courTest))
                 .isInstanceOf(ObjetMetierNonValideException.class)
                 .hasMessageContaining("Le cours transmis n'est pas correcte");
     }
