@@ -1,22 +1,21 @@
 package com.example.offf.hexagon.domain.model;
 
-import com.example.offf.hexagon.domain.exception.ObjetMetierNonValideException;
-
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 public class Cour {
 
-    private static final String COURS_TRANSMIS_NON_CORRECT = "Le cours transmis n'est pas correcte";
     private long id;
     private TypeDeCours typeDeCours;
     private LocalDateTime dateDuCours;
+    private Set<Sportif> sportifs;
 
     private Cour(CourBuilder courBuilder) {
         this.id = courBuilder.id;
         this.typeDeCours = courBuilder.typeDeCours;
         this.dateDuCours = courBuilder.dateDuCours;
-
+        this.sportifs = courBuilder.sportifs;
     }
 
     public long getId() {
@@ -38,12 +37,13 @@ public class Cour {
         Cour cour = (Cour) o;
         return id == cour.id &&
                 typeDeCours == cour.typeDeCours &&
-                Objects.equals(dateDuCours, cour.dateDuCours);
+                Objects.equals(dateDuCours, cour.dateDuCours) &&
+                Objects.equals(sportifs, cour.sportifs);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, typeDeCours, dateDuCours);
+        return Objects.hash(id, typeDeCours, dateDuCours, sportifs);
     }
 
     @Override
@@ -51,30 +51,30 @@ public class Cour {
         return "Cour{" +
                 "id=" + id +
                 ", typeDeCours=" + typeDeCours +
-                ", simpleDateFormat=" + dateDuCours +
+                ", dateDuCours=" + dateDuCours +
+                ", sportifs=" + sportifs +
                 '}';
     }
 
-    public void isValide() {
+    public boolean isValide() {
         boolean isValid = true;
 
-        if (null == typeDeCours) {
+        if (Objects.isNull(typeDeCours)) {
             isValid = false;
         }
 
-        if (null == dateDuCours) {
+        if (Objects.isNull(dateDuCours)) {
             isValid = false;
         }
 
-        if (!isValid) {
-            throw new ObjetMetierNonValideException(COURS_TRANSMIS_NON_CORRECT);
-        }
+        return isValid;
     }
 
     public static class CourBuilder {
         private long id;
         private TypeDeCours typeDeCours;
         private LocalDateTime dateDuCours;
+        private Set<Sportif> sportifs;
 
         public CourBuilder id(long id) {
             this.id = id;
@@ -88,6 +88,11 @@ public class Cour {
 
         public CourBuilder dateDuCours(LocalDateTime dateDuCours) {
             this.dateDuCours = dateDuCours;
+            return this;
+        }
+
+        public CourBuilder sportifs(Set<Sportif> sportifs) {
+            this.sportifs = sportifs;
             return this;
         }
 

@@ -1,11 +1,14 @@
 package com.example.offf.hexagon.domain.port.primary;
 
+import com.example.offf.hexagon.domain.exception.ObjetMetierNonValideException;
 import com.example.offf.hexagon.domain.port.secondary.CourAdapter;
 import com.example.offf.hexagon.domain.model.Cour;
 
 import java.util.List;
 
 public class GestionCours implements com.example.offf.hexagon.domain.usecases.CoursManagement {
+
+    private static final String COURS_TRANSMIS_NON_CORRECT = "Le cours transmis n'est pas correcte";
 
     CourAdapter courAdapter;
 
@@ -15,7 +18,10 @@ public class GestionCours implements com.example.offf.hexagon.domain.usecases.Co
 
     @Override
     public Cour creerCour(Cour cour) {
-        cour.isValide();
+        if (!cour.isValide()) {
+            throw new ObjetMetierNonValideException(COURS_TRANSMIS_NON_CORRECT);
+        }
+
         return courAdapter.createCour(cour).get();
     }
 
