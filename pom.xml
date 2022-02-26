@@ -102,7 +102,7 @@
 						<param>com.example.offf*</param>
 					</targetClasses>
 					<targetTests>
-						<param>com.example.offf*</param>
+						<param>com.example.offf.hexagon*</param>
 					</targetTests>
 				</configuration>
 			</plugin>
