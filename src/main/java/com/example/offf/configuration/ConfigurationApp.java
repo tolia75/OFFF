@@ -2,9 +2,11 @@ package com.example.offf.configuration;
 
 import com.example.offf.hexagon.domain.port.primary.GestionCours;
 import com.example.offf.hexagon.domain.port.primary.GestionSportif;
+import com.example.offf.hexagon.domain.port.primary.ReservationImpl;
 import com.example.offf.hexagon.domain.port.secondary.CourAdapter;
 import com.example.offf.hexagon.domain.port.secondary.SportifAdapter;
 import com.example.offf.hexagon.domain.usecases.CoursManagement;
+import com.example.offf.hexagon.domain.usecases.Reservation;
 import com.example.offf.hexagon.domain.usecases.SportifManagement;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,4 +27,7 @@ public class ConfigurationApp {
 
     @Bean
     public SportifManagement sportifManagement() {return new GestionSportif(sportifAdapter);}
+
+    @Bean
+    public Reservation reservation() {return new ReservationImpl(courAdapter);}
 }

@@ -6,16 +6,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity()
 @Table(name = "sportif")
-public class SportifDao {
+public class SportifDao implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sportif_id")
     private long id;
     private String nom;
     private String prenom;
+
+    public SportifDao() {
+    }
 
     public SportifDao(SportifDaoBuilder sportifBuilder) {
         this.id = sportifBuilder.id;

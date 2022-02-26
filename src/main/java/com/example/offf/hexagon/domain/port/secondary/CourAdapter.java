@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CourAdapter {
-    Optional<Cour> createCour(Cour cour);
+    Optional<Cour> saveCour(Cour cour);
 
     List<Cour> getAllCours();
+
+    Optional<Cour> addSportifsToCour(Cour cour);
+
 }

@@ -3,6 +3,7 @@ package com.example.offf.hexagon.infrastructure.database;
 import com.example.offf.hexagon.domain.model.Cour;
 import com.example.offf.hexagon.domain.port.secondary.CourAdapter;
 import com.example.offf.hexagon.infrastructure.database.dao.CourDAO;
+import com.example.offf.hexagon.infrastructure.database.dao.DaoMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,40 +14,30 @@ import java.util.stream.StreamSupport;
 @Component
 public class CourAdapterDatabase implements CourAdapter {
 
-    CourRepositoryPostgres courRepositoryPostgres;
+    private CourRepositoryPostgres courRepositoryPostgres;
+    private DaoMapper daoMapper;
 
-    public CourAdapterDatabase(CourRepositoryPostgres courRepositoryPostgres) {
+    public CourAdapterDatabase(CourRepositoryPostgres courRepositoryPostgres, DaoMapper daoMapper) {
         this.courRepositoryPostgres = courRepositoryPostgres;
+        this.daoMapper = daoMapper;
     }
 
     @Override
-    public Optional<Cour> createCour(Cour cour) {
-        CourDAO courDAO = toCourDAO(cour);
-        return Optional.of(toCour(courRepositoryPostgres.save(courDAO)));
+    public Optional<Cour> saveCour(Cour cour) {
+        CourDAO courDAO = daoMapper.toCourDAO(cour);
+        return Optional.of(daoMapper.toCour(courRepositoryPostgres.save(courDAO)));
     }
 
     @Override
     public List<Cour> getAllCours() {
         return StreamSupport.stream(courRepositoryPostgres.findAll().spliterator(), false)
-                .map(this::toCour)
+                .map(courDao -> daoMapper.toCour(courDao))
                 .collect(Collectors.toList());
     }
 
-    private CourDAO toCourDAO(Cour cour) {
-        return new CourDAO.CourDAOBuilder()
-                .id(cour.getId())
-                .typeDeCours(cour.getTypeDeCours())
-                .dateDuCours(cour.getDateDuCours())
-                .build();
+    @Override
+    public Optional<Cour> addSportifsToCour(Cour cour) {
+        CourDAO courDAO = courRepositoryPostgres.save(daoMapper.toCourDAO(cour));
+        return Optional.of(daoMapper.toCour(courDAO));
     }
-
-    private Cour toCour(CourDAO courDAO) {
-        return new Cour.CourBuilder()
-                .id(courDAO.getId())
-                .typeDeCours(courDAO.getTypeDeCour())
-                .dateDuCours(courDAO.getDateDuCour())
-                .build();
-    }
-
-
 }

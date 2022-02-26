@@ -1,8 +1,10 @@
 package com.example.offf.hexagon.domain.model;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Cour {
 
@@ -15,7 +17,12 @@ public class Cour {
         this.id = courBuilder.id;
         this.typeDeCours = courBuilder.typeDeCours;
         this.dateDuCours = courBuilder.dateDuCours;
-        this.sportifs = courBuilder.sportifs;
+
+        if (Objects.isNull(courBuilder.sportifs)) {
+            this.sportifs = new HashSet<>();
+        } else {
+            this.sportifs = courBuilder.sportifs;
+        }
     }
 
     public long getId() {
@@ -68,6 +75,10 @@ public class Cour {
         }
 
         return isValid;
+    }
+
+    public Set<Sportif> getSportifs() {
+        return sportifs;
     }
 
     public static class CourBuilder {

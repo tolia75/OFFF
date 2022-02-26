@@ -7,12 +7,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity()
 @Table(name = "cour")
-public class CourDAO {
+public class CourDAO implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +27,12 @@ public class CourDAO {
     private long id;
     private TypeDeCours typeDeCour;
     private LocalDateTime dateDuCour;
+    @OneToMany
+    @JoinTable(name = "cour_sportif",
+    joinColumns = @JoinColumn(name = "cour_id", referencedColumnName = "cour_id"),
+    inverseJoinColumns = @JoinColumn(name = "sportif_id", referencedColumnName = "sportif_id", unique = true))
+    private Set<SportifDao> sportifsDaos = new HashSet<>();
+
 
     public CourDAO() {
     }
@@ -28,6 +41,11 @@ public class CourDAO {
         this.id = courDAOBuilder.id;
         this.typeDeCour = courDAOBuilder.typeDeCours;
         this.dateDuCour = courDAOBuilder.dateDuCours;
+        if (Objects.isNull(courDAOBuilder.sportifsDaos)) {
+            this.sportifsDaos = new HashSet<>();
+        } else {
+            this.sportifsDaos = courDAOBuilder.sportifsDaos;
+        }
     }
 
     public long getId() {
@@ -42,10 +60,15 @@ public class CourDAO {
         return dateDuCour;
     }
 
+    public Set<SportifDao> getSportifsDaos() {
+        return sportifsDaos;
+    }
+
     public static class CourDAOBuilder {
         private long id;
         private TypeDeCours typeDeCours;
         private LocalDateTime dateDuCours;
+        private Set<SportifDao> sportifsDaos;
 
         public CourDAOBuilder id(long id) {
             this.id = id;
@@ -62,8 +85,13 @@ public class CourDAO {
             return this;
         }
 
+        public CourDAOBuilder sportifs(Set<SportifDao> sportifsDaos) {
+            this.sportifsDaos = sportifsDaos;
+            return this;
+        }
         public CourDAO build() {
             return new CourDAO(this);
         }
+
     }
 }

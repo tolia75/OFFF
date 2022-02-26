@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface Reservation {
 
-    Optional<Cour> reserveCours(long sportifId, long idCours);
+    Optional<Cour> reserveCours(Cour cour);
 }

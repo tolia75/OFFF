@@ -15,8 +15,7 @@ public class ReservationImpl implements Reservation {
     }
 
     @Override
-    public Optional<Cour> reserveCours(long sportifId, long idCours) {
-        return Optional.empty();
-//                courAdapter.addSportifToCour(sportifId, idCours);
+    public Optional<Cour> reserveCours(Cour cour) {
+        return courAdapter.addSportifsToCour(cour);
     }
 }

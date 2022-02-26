@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -19,39 +20,66 @@ class ReservationTest {
     private Reservation reservation;
     private CourAdapter courAdapter;
     private CoursFixture coursFixture;
+    private SportifFixture sportifFixture;
 
     @BeforeEach
     void setUp() {
+        sportifFixture = new SportifFixture(new HashSet<>());
         coursFixture = new CoursFixture();
-        courAdapter = new CourAdapterStub(coursFixture);
+        courAdapter = new CourAdapterStub(coursFixture, sportifFixture);
         reservation = new ReservationImpl(courAdapter);
     }
 
-
-//    @Test
+    @Test
     void doitReserverUnCoursAvecSucces() {
         // Given
-//        long sportifId = 1;
-//        Sportif sportif= new Sportif();
-////        Cour cour = new Cour.CourBuilder()
-////                .id(2)
-////                .typeDeCours(TypeDeCours.YOGA)
-////                .dateDuCours(LocalDateTime.of(2022, 1, 1, 20, 00))
-////                .build();
-//        long courId = 2;
-//        Cour expectedCour = new Cour.CourBuilder()
-//                .id(2)
-//                .typeDeCours(TypeDeCours.YOGA)
-//                .dateDuCours(LocalDateTime.of(2022, 1, 1, 20, 00))
-//                .sportifs(Set.of(sportif))
-//                .build();
-//
-//        // When
-//        Optional<Cour> courMisAJour = reservation.reserveCours(sportifId, courId);
-//
-//        // Assert
-//        assertThat(courMisAJour.get()).isEqualTo(expectedCour);
+        long sportifId = 1;
+        Sportif sportif= new Sportif.SportifBuilder()
+                .id(sportifId)
+                .nom("nom")
+                .prenom("prenom")
+                .build();
+
+        long courId = 1;
+        Cour expectedCour = new Cour.CourBuilder()
+                .id(courId)
+                .typeDeCours(TypeDeCours.YOGA)
+                .dateDuCours(LocalDateTime.of(2022, 1, 1, 20, 20))
+                .sportifs(Set.of(sportif))
+                .build();
+
+        // When
+        Optional<Cour> courMisAJour = reservation.reserveCours(expectedCour);
+
+        // Assert
+        assertThat(courMisAJour.get()).isEqualTo(expectedCour);
     }
+
+    @Test
+    void neDoitPasReserverUnCoursCarPasDID() {
+        // Given
+        long sportifId = 1;
+        Sportif sportif= new Sportif.SportifBuilder()
+                .id(sportifId)
+                .nom("nom")
+                .prenom("prenom")
+                .build();
+
+        long courId = 1;
+        Cour expectedCour = new Cour.CourBuilder()
+                .id(courId)
+                .typeDeCours(TypeDeCours.YOGA)
+                .dateDuCours(LocalDateTime.of(2022, 1, 1, 20, 20))
+                .sportifs(Set.of(sportif))
+                .build();
+
+        // When
+        Optional<Cour> courMisAJour = reservation.reserveCours(expectedCour);
+
+        // Assert
+        assertThat(courMisAJour.get()).isEqualTo(expectedCour);
+    }
+
 }
 
 

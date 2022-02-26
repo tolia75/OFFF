@@ -3,31 +3,34 @@ package com.example.offf.database;
 import com.example.offf.hexagon.domain.model.Sportif;
 import com.example.offf.hexagon.infrastructure.database.SportifAdapterDatabase;
 import com.example.offf.hexagon.infrastructure.database.SportifRepositoryPostgres;
+import com.example.offf.hexagon.infrastructure.database.dao.DaoMapper;
 import com.example.offf.hexagon.infrastructure.database.dao.SportifDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@ExtendWith(SpringExtension.class)
+@DataJpaTest
+@AutoConfigureTestDatabase
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class SportifAdapterDatabaseTests {
 
-    @Mock
+    @Autowired
     SportifRepositoryPostgres sportifRepositoryPostgres;
     SportifAdapterDatabase sportifAdapterDatabase;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.initMocks(this);
-        sportifAdapterDatabase = new SportifAdapterDatabase(sportifRepositoryPostgres);
+        sportifAdapterDatabase = new SportifAdapterDatabase(sportifRepositoryPostgres, new DaoMapper());
     }
 
     @Test
@@ -46,8 +49,6 @@ class SportifAdapterDatabaseTests {
                 .nom("nom")
                 .prenom("prenom")
                 .build();
-        when(sportifRepositoryPostgres.save(any())).thenReturn(sportifDao);
-
 
         Optional<Sportif> sportif = sportifAdapterDatabase.createSportif(sportifWithoutId);
 

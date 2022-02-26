@@ -28,6 +28,15 @@ public class Sportif {
         return Objects.hash(id, nom, prenom);
     }
 
+    @Override
+    public String toString() {
+        return "Sportif{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                '}';
+    }
+
     public long getId() {
         return id;
     }

@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 public class CourDto implements Serializable {
 
@@ -16,14 +19,20 @@ public class CourDto implements Serializable {
     @JsonProperty("dateDuCour")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime dateDuCour;
+    private Set<SportifDto> sportifsDtos;
 
     private CourDto() {
     }
 
-    private CourDto(CourDtoBuilder courDAOBuilder) {
-        this.id = courDAOBuilder.id;
-        this.typeDeCour = courDAOBuilder.typeDeCour;
-        this.dateDuCour = courDAOBuilder.dateDuCour;
+    private CourDto(CourDtoBuilder courDtoBuilder) {
+        this.id = courDtoBuilder.id;
+        this.typeDeCour = courDtoBuilder.typeDeCour;
+        this.dateDuCour = courDtoBuilder.dateDuCour;
+        if (Objects.isNull(courDtoBuilder.sportifDto)) {
+            this.sportifsDtos = new HashSet<>();
+        } else {
+            this.sportifsDtos = courDtoBuilder.sportifDto;
+        }
     }
 
     public long getId() {
@@ -38,10 +47,15 @@ public class CourDto implements Serializable {
         return dateDuCour;
     }
 
+    public Set<SportifDto> getSportifsDtos() {
+        return sportifsDtos;
+    }
+
     public static class CourDtoBuilder {
         private long id;
         private TypeDeCours typeDeCour;
         private LocalDateTime dateDuCour;
+        private Set<SportifDto> sportifDto;
 
         public CourDtoBuilder id(long id) {
             this.id = id;
@@ -55,6 +69,11 @@ public class CourDto implements Serializable {
 
         public CourDtoBuilder dateDuCour(LocalDateTime dateDuCour) {
             this.dateDuCour = dateDuCour;
+            return this;
+        }
+
+        public CourDtoBuilder sportifDto(Set<SportifDto> sportifDto) {
+            this.sportifDto = sportifDto;
             return this;
         }
 

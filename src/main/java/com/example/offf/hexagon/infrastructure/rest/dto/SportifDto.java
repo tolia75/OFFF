@@ -1,6 +1,8 @@
 package com.example.offf.hexagon.infrastructure.rest.dto;
 
-public class SportifDto {
+import java.io.Serializable;
+
+public class SportifDto implements Serializable {
 
     private long id;
     private String nom;
