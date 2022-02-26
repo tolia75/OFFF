@@ -31,8 +31,4 @@ public class GestionCours implements CoursManagement {
         return courAdapter.getAllCours();
     }
 
-    @Override
-    public Cour updateCour(Cour courAUpdate) {
-        return courAdapter.saveCour(courAUpdate).get();
-    }
 }
