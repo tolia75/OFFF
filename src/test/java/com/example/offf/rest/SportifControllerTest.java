@@ -67,7 +67,7 @@ public class SportifControllerTest {
                                 .prenom("prenom")
                                 .build())))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("id", is(1)))
+                .andExpect(jsonPath("id", is(4)))
                 .andExpect(jsonPath("nom", is("nom")))
                 .andExpect(jsonPath("prenom", is("prenom")));
     }
