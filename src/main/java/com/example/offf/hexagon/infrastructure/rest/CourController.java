@@ -40,7 +40,8 @@ public class CourController {
     @PostMapping("/sportif")
     public ResponseEntity<CourDto> addSportifToCour(@RequestBody CourDto courDto) {
         Cour courMisAJour= reservation.reserveCours(dtoMapper.toCour(courDto)).get();
-        return new ResponseEntity(courMisAJour, HttpStatus.OK);
+        CourDto courDtoMisAJour = dtoMapper.toCourDto(courMisAJour);
+        return new ResponseEntity(courDtoMisAJour, HttpStatus.OK);
     }
 
     @GetMapping("cours")

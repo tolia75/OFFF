@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
@@ -24,9 +25,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Sql(scripts = "classpath:schema-test.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 class CourControllerTest {
-
-    // TODO - ADS - Gérer une base tampon pour les tests
 
     @Autowired
     private MockMvc mockMvc;
@@ -76,9 +76,9 @@ class CourControllerTest {
                                 .dateDuCour(LocalDateTime.of(2022, 1,1,1,1))
                                 .build())))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id", is("1")))
-                .andExpect(jsonPath("$[0].typeDeCour", is("YOGA")))
-                .andExpect(jsonPath("$[0].dateDuCour", is("14/02/2022 00:00:00")));
+                .andExpect(jsonPath("id", is(4)))
+                .andExpect(jsonPath("typeDeCour", is("YOGA")))
+                .andExpect(jsonPath("dateDuCour", is("01/01/2022 01:01:00")));
 
     }
 
@@ -87,7 +87,7 @@ class CourControllerTest {
         mockMvc.perform(get("/cour/cours"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id", is(1)))
-                .andExpect(jsonPath("$[0].typeDeCour", is("YOGA")))
+                .andExpect(jsonPath("$[0].typeDeCour", is("HIIT")))
                 .andExpect(jsonPath("$[0].dateDuCour", is("14/02/2022 00:00:00")))
                 .andExpect(jsonPath("$[0].sportifsDtos[0].id", is(1)))
                 .andExpect(jsonPath("$[0].sportifsDtos[0].nom", is("nom")))
@@ -95,11 +95,11 @@ class CourControllerTest {
 
 
                 .andExpect(jsonPath("$[1].id", is(2)))
-                .andExpect(jsonPath("$[1].typeDeCour", is("HIIT")))
+                .andExpect(jsonPath("$[1].typeDeCour", is("YOGA")))
                 .andExpect(jsonPath("$[1].dateDuCour", is("14/02/2022 00:00:00")))
 
                 .andExpect(jsonPath("$[2].id", is(3)))
-                .andExpect(jsonPath("$[2].typeDeCour", is("ZUMBA")))
+                .andExpect(jsonPath("$[2].typeDeCour", is("PILATE")))
                 .andExpect(jsonPath("$[2].dateDuCour", is("14/02/2022 00:00:00")));
     }
 
@@ -124,9 +124,11 @@ class CourControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(expectedCour)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id", is("1")))
-                .andExpect(jsonPath("$[0].typeDeCour", is("YOGA")))
-                .andExpect(jsonPath("$[0].dateDuCour", is("14/02/2022 00:00:00")));
-
+                .andExpect(jsonPath("id", is(1)))
+                .andExpect(jsonPath("typeDeCour", is("YOGA")))
+                .andExpect(jsonPath("dateDuCour", is("01/01/2022 20:20:00")))
+                .andExpect(jsonPath("sportifsDtos[0].id", is(1)))
+                .andExpect(jsonPath("sportifsDtos[0].nom", is("nom")))
+                .andExpect(jsonPath("sportifsDtos[0].prenom", is("prenom")));
     }
 }
